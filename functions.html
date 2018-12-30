@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<!-- Basic Page Needs
+  ================================================== -->
+<meta charset="utf-8">
+<title>Home</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- Mobile Specific Metas
+  ================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- Skin (you can set a different color skin here - just change the name of the color)
+  ================================================== -->
+<link rel="stylesheet" href="stylesheets/skins/blue.css">
+
+<!-- CSS
+  ================================================== -->
+<link rel="stylesheet" href="stylesheets/style.css">
+<link rel="stylesheet" href="stylesheets/styleresponsive.css">
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!-- Favicons
+	================================================== -->
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+</head>
+<body>
+<!-- Navigation
+	================================================== -->
+<div id="wrapnav">
+	<div class="container">
+		<div class="three columns alpha">
+			<div id="top" style="display:inline;">
+				<span class="logo"><a href="index.html">PAM</a></span>
+				<br/><span class="subheader">Parallel Augmented Maps</span>
+			</div>
+		</div>
+		<div class="thirteen columns omega">
+			<div class="menu">
+				<nav>
+				<ul class="menuitems">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="document.html">Document</a></li>
+					<li><a href="index.html#references">References</a></li>
+                    <li><a href="index.html#team">Team</a></li>
+					<li><a href="index.html#contact">Contact Us</a></li>
+				</ul>
+				</nav>
+			</div>
+			<div class="rightnav">
+				<span class="rightnavtext">Questions?</span>
+				<br/>Contact: syhlalala at gmail dot com
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Guarantee Section
+================================================== -->
+<div class="scrollpause">
+</div>
+<div class="container">
+	<div class="one-third column separatorv">	  
+    <ul>
+    <li><h3> <a href="document.html">Getting Started</a></h3></li>
+    <li><h3> <a href="interface.html">Interface</a></h3>
+		<p class="paddright">
+			 <ul class="square">
+             <li><a href="interface.html#augmap">The Augmented Map</a></li>
+             <li><a href="interface.html#declare">Declare a Data Type in PAM</a></li>
+             </ul>
+        </p>
+     </li>
+	<li>
+	  <h3><a href="functions.html">Functions</a></h3>
+		<p class="paddright">
+	    <ul class="square">
+             <li><a href="functions.html#seq">For Sequences</a></li>
+             <li><a href="functions.html#set">For Ordered Sets</a></li>             <li><a href="functions.html#map">For Ordered Maps</a></li>             <li><a href="functions.html#augmap">For Augmented Maps</a></li>             </ul>
+             </p>
+      </li>
+	<li>
+	  <h3><a href="examples.html">Examples</a></h3>
+		<p class="paddright">
+	    <ul class="square">
+             <li><a href="examples.html#interval">1D Stabbing Query</a></li>
+             <li><a href="examples.html#range">2D Range Query</a></li>             </ul>
+             </p>
+      </li>
+    </ul>
+	</div>
+	<div class="two-thirds column omega">
+    The main functions and their definitions. For a complete list of functions and their arguments, please check the library. Many of the definitions are also informal, formal definitions can be found in the PAM paper [PPoPP2018].
+		<h3 id="seq">For Sequences:</h3>
+        M is the set type. E = K. Z is the integer set.        
+        <table width="600" border="1">
+          <tr>
+            <td width="160"><strong>rank(m, k)</strong></td>
+            <td width="160">M &times; E &rarr; K</td>
+            <td>The rank of key k in m</td>
+          </tr>
+          <tr>
+            <td><strong>first(m)</strong></td>
+            <td>M &rarr; E</td>
+            <td>The first element in m</td>
+          </tr>
+          <tr>
+            <td><strong>last(m)</strong></td>
+            <td>M &rarr; E</td>
+            <td>The last element in m</td>
+          </tr>
+          <tr>
+            <td><strong>filter(m, &phi;)</strong></td>
+            <td>M &times; (E &rarr; bool) &rarr; M</td>
+            <td>All elements in m that satisfy &phi;</td>
+          </tr>
+          <tr>
+            <td><strong>map_reduce(m, map, reduce, zero)</strong></td>
+            <td>M &times; (E &rarr; B) &times; (B &times; B &rarr; B) &times; B &rarr; B</td>
+            <td>Mapping all elements in m using the function "map" and then reduce all result using the function "reduce", with an identity of "zero"</td>
+          </tr>
+          <tr>
+            <td><strong>pam_seq()</strong></td>
+            <td>&empty; &rarr; M</td>
+            <td>Constructor. Create an empty sequence (tree)</td>
+          </tr>
+          <tr>
+            <td><strong>pam_seq(e)</strong></td>
+            <td>E &rarr; M</td>
+            <td>Constructor Create a sequence (tree) from a single entry</td>
+          </tr>
+          <tr>
+            <td><strong>pam_seq(a)</strong></td>
+            <td>array &rarr; M</td>
+            <td>Constructor. Construct a sequence (tree) from an array.</td>
+          </tr>
+          <tr>
+            <td><strong>for_each_index(m, &phi;)</strong></td>
+            <td>M &times; (E &times; Z &rarr; B) &rarr; &empty;</td>
+            <td>Apply &phi; to all entries and their ranks in the map</td>
+          </tr>
+          <tr>
+            <td><strong>to_seq(m)</strong></td>
+            <td>M  &rarr; array</td>
+            <td>Output all elements in m to an array</td>
+          </tr>
+          <tr>
+            <td><strong>keys(m)</strong></td>
+            <td>M  &rarr; array</td>
+            <td>Output all keys in m to an array</td>
+          </tr>
+          <tr>
+            <td><strong>insert(m, e)</strong></td>
+            <td>M &times; E &rarr; M</td>
+            <td>Insert an entry e in m</td>
+          </tr>
+          <tr>
+            <td><strong>join2(m1, m2)</strong></td>
+            <td>M &times; M &rarr; M</td>
+            <td>Concatenate two sequences</td>
+          </tr>
+          <tr>
+            <td><strong>size(m)</strong></td>
+            <td>M &rarr; Z</td>
+            <td>The size of m</td>
+          </tr>
+          <tr>
+            <td><strong>clear(m)</strong></td>
+            <td>M &rarr; M</td>
+            <td>Clear m to an empty sequence (tree)</td>
+          </tr>
+          <tr>
+            <td><strong>reserve(n)</strong></td>
+            <td>Z &rarr; &empty;</td>
+            <td>Reserve n tree nodes</td>
+          </tr>
+          <tr>
+            <td><strong>finish</strong></td>
+            <td></td>
+            <td>Static function. Collect related tree nodes at the end</td>
+          </tr>          
+        </table>
+        
+        <br />
+
+		<h3 id="set">For Ordered Sets:</h3>
+        <p>M is the sequence type. E = K. Z is the integer set.<br />
+        All functions on sequences can also be applied on sets with the same definition.</p>
+        <table width="600" border="1">
+          <tr>
+            <td width="160"><strong>select(m,i)</strong></td>
+            <td width="160">M &times; Z &rarr; E</td>
+            <td>The i-th element in m</td>
+          </tr>
+          <tr>
+            <td><strong>first(m)</strong></td>
+            <td>M &rarr; E</td>
+            <td>The first element in m</td>
+          </tr>
+          <tr>
+            <td><strong>last(m)</strong></td>
+            <td>M &rarr; E</td>
+            <td>The last element in m</td>
+          </tr>
+          <tr>
+            <td><strong>previous(m, k)</strong></td>
+            <td>M &times; K &rarr; E</td>
+            <td>The largest element in m with key smaller than k</td>
+          </tr>
+          <tr>
+            <td><strong>next(m, k)</strong></td>
+            <td>M &times; K &rarr; E</td>
+            <td>The smallest element in m with key larger than k</td>
+          </tr>
+          <tr>
+            <td><strong>find(m, k)</strong></td>
+            <td>M &times; K &rarr; bool</td>
+            <td>Determine if k is in m</td>
+          </tr>
+          <tr>
+            <td><strong>insert(m, e)</strong></td>
+            <td>M &times; E &rarr; M</td>
+            <td>Insert an entry e in m</td>
+          </tr>
+          <tr>
+            <td><strong>delete(m, k)</strong></td>
+            <td>M &times; K &rarr; M</td>
+            <td>Delete they key k in m</td>
+          </tr>
+          <tr>
+            <td><strong>map_union(m1, m2)</strong></td>
+            <td>M &times; M &rarr; M</td>
+            <td>Take the union of two sets</td>
+          </tr>
+          <tr>
+            <td><strong>map_intersection(m1, m2)</strong></td>
+            <td>M &times; M &rarr; M</td>
+            <td>Take the intersection of two sets</td>
+          </tr>
+          <tr>
+            <td><strong>map_difference(m1, m2)</strong></td>
+            <td>M &times; M &rarr; M</td>
+            <td>Take the difference of two sets</td>
+          </tr>
+          <tr>
+            <td><strong>multi_insert(m, a)</strong></td>
+            <td>M &times; array &rarr; M</td>
+            <td>Insert an array of entries into m</td>
+          </tr>
+          <tr>
+            <td><strong>range(m, k1, k2)</strong></td>
+            <td>M &times; K &times; K &rarr; M</td>
+            <td>All entries in m in the key range [k1, k2]</td>
+          </tr>
+          <tr>
+            <td><strong>upTo(m, k)</strong></td>
+            <td>M &times; K &times; K &rarr; M</td>
+            <td>All entries in m in with keys no greater than k</td>
+          </tr>
+          <tr>
+            <td><strong>DownTo(m, k)</strong></td>
+            <td>M &times; K &times; K &rarr; M</td>
+            <td>All entries in m with keys no less than k</td>
+          </tr>
+        </table>
+        <br />
+		<h3 id="map">For Ordered Maps:</h3>
+        <p>M is the sequence type. E = K &times V. Z is the integer set.<br />
+        All functions on sequences and ordered sets can also be applied on maps with the same definition.</p>
+        <table width="600" border="1">
+          <tr>
+            <td width="160"><strong>find(m, k)</strong></td>
+            <td width="160">M &times; K &rarr; V</td>
+            <td>The value of k in m</td>
+          </tr>
+          <tr>
+            <td><strong>insert(m, e, &phi;)</strong></td>
+            <td>M &times; E &times; (V &times; V) &rarr; M</td>
+            <td>Insert an entry e in m. If the key of e already exists in m, combine the the original value in the map with the value of e</td>
+          </tr>
+          <tr>
+            <td><strong>map_union(m1, m2, &phi;)</strong></td>
+            <td>M &times; M &times; (V &times; V) &rarr; M</td>
+            <td>Take the union of two sets. If there are duplicate keys in both m1 and m2, combine their values using &phi;</td>
+          </tr>
+          <tr>
+            <td><strong>map_intersection(m1, m2, &phi;)</strong></td>
+            <td>M &times; M &times; (V &times; V) &rarr; M</td>
+            <td>Take the intersection of two sets. If there are duplicate keys in both m1 and m2, combine their values using &phi;</td>
+          </tr>
+          <tr>
+            <td><strong>map_difference(m1, m2)</strong></td>
+            <td>M &times; M &rarr; M</td>
+            <td>Take the difference of two sets</td>
+          </tr>
+          <tr>
+            <td><strong>multi_insert(m, a, &phi;)</strong></td>
+            <td>M &times; array &rarr; M</td>
+            <td>Insert an array of entries into m. If there are duplicate keys in a, or any key in a has already appeared in m, combine their values using &phi;</td>
+          </tr>
+          <tr>
+            <td><strong>pam_map(a, &phi;)</strong></td>
+            <td>M &times; array &rarr; M</td>
+            <td>Constructor. Build an ordered map (tree) from an array of entries. If there are duplicate keys in a, combine their values using &phi;</td>
+          </tr>
+        </table>
+        <br />
+		<h3 id="augmap">For Augmented Maps:</h3>
+        <p>M is the augmented map type. E = K &times V. Z is the integer set.<br />
+        All functions on sequences, ordered sets and ordered maps can also be applied on augmented maps with the same definition.</p>
+        <table width="600" border="1">
+          <tr>
+            <td width="160"><strong>aug_val(m)</strong></td>
+            <td width="160">M &rarr; A</td>
+            <td>The augemented value of m</td>
+          </tr>
+          <tr>
+            <td><strong>aug_left(m, k)</strong></td>
+            <td>M &times; K &rarr; A</td>
+            <td>The augmented value of all entries with keys no more than k</td>
+          </tr>
+          <tr>
+            <td><strong>aug_right(m, k)</strong></td>
+            <td>M &times; K &rarr; A</td>
+            <td>The augmented value of all entries with keys no less than k</td>
+          </tr>
+          <tr>
+            <td><strong>aug_range(m, k1, k2)</strong></td>
+            <td>M &times; K &times; &rarr; A</td>
+            <td>The augmented value of all entries within key range [k1, k2]</td>
+          </tr>
+          <tr>
+            <td><strong>aug_select(m, &phi;)</strong></td>
+            <td>M &times; (A &rarr; bool) &rarr; E</td>
+            <td>The first entry e that makes &phi;(aug_left(m, key(e))) true. Only applicable when &phi;(a1) &rArr; &phi;(f(a1, a2)). E.g., when the combine function is addition and &phi;(x) determines if x is greater than some constant.   </td>
+          </tr>
+          <tr>
+            <td><strong>aug_filter(m, h)</strong></td>
+            <td>M &times; (A &rarr; bool) &rarr; M</td>
+            <td>Equivalent to filter(m,h') for h': K &times; V &rarr; bool, where h(g(k,v)) &rArr; h'(k,v). Only applicable when h(a) or h(b) &rarr; h(f(a,b)).</td>
+          </tr>
+          <tr>
+            <td><strong>aug_sum_range(m, k1, k2, h1, h2, zero)</strong></td>
+            <td>M &times; K &times; K &times; (V &times; B &rarr; B) &times; (A &times; B &rarr; B) &times; B &rarr; M</td>
+            <td>For all entries in m within key range [k1, k2], add their values to "zero" by h1. Only applicable when adding values using h1 is equivalent to adding augmented values by h2. </td>
+          </tr>
+        </table>
+        
+
+	</div>
+</div>
+
+	<div class="footerwrap">
+		<div class="footer">
+			<p class="back-top floatright">
+				<a href="#top"><span></span></a>
+			</p>
+			<div class="container negdown">
+				<div class="sixteen columns negdown">
+					<div class="four columns alpha">
+					  <div class="footertext">
+						<h1 id="contact">Contact Us</h1>
+						Email: Please send your message to <a href="syhlalala@gmail.com">syhlalala@gmail.com</a><br/>You can also submit your feedback on <a href="https://github.com/cmuparlay/PAM">Github</a>. </div>
+					</div>
+					<div class="four columns">
+						<div class="footertext floatright">
+							<h1>Quick Links</h1>
+							 <a href="index.html">Home</a><br/><a href="document.html">Document</a><br/><a href="https://github.com/cmuparlay/PAM">Download</a>
+						</div>
+					</div>
+					<div class="four columns omega">
+						<div class="footertext floatright">
+							<h1>Document Links</h1>
+							 							<a href="document.html">Getting Started</a><br/><a href="interface.html">Interface</a><br/><a href="functions.html">Functions</a> <br/><a href="examples.html">Examples</a> 
+						</div>
+					</div>
+				<div class="four columns">
+						<div class="footertext floatright">
+						  <h1>Useful Links</h1>
+							 <a href="https://github.com/cmuparlay">CMU-Parlay</a><br/>
+							 <a href="https://www.cs.cmu.edu/~pbbs/index.html">PBBS</a><br/><a href="https://jshun.github.io/ligra/">Ligra</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="copyright">
+		<div class="gototopmobile">
+			<a href="#top">Go to Top</a>
+		</div>
+		 Copyright &copy; 2018. Last Updated by Yihan Sun.
+	</div>
+	<!-- Scripts
+================================================== -->
+
+	<!-- End Document
+================================================== -->
+</body>
+</html>

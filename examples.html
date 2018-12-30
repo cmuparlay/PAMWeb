@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<!-- Basic Page Needs
+  ================================================== -->
+<meta charset="utf-8">
+<title>Home</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- Mobile Specific Metas
+  ================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- Skin (you can set a different color skin here - just change the name of the color)
+  ================================================== -->
+<link rel="stylesheet" href="stylesheets/skins/blue.css">
+
+<!-- CSS
+  ================================================== -->
+<link rel="stylesheet" href="stylesheets/style.css">
+<link rel="stylesheet" href="stylesheets/styleresponsive.css">
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!-- Favicons
+	================================================== -->
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+</head>
+<body>
+<!-- Navigation
+	================================================== -->
+<div id="wrapnav">
+	<div class="container">
+		<div class="three columns alpha">
+			<div id="top" style="display:inline;">
+				<span class="logo"><a href="index.html">PAM</a></span>
+				<br/><span class="subheader">Parallel Augmented Maps</span>
+			</div>
+		</div>
+		<div class="thirteen columns omega">
+			<div class="menu">
+				<nav>
+				<ul class="menuitems">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="document.html">Document</a></li>
+					<li><a href="index.html#references">References</a></li>
+                    <li><a href="index.html#team">Team</a></li>
+					<li><a href="index.html#contact">Contact Us</a></li>
+				</ul>
+				</nav>
+			</div>
+			<div class="rightnav">
+				<span class="rightnavtext">Questions?</span>
+				<br/>Contact: syhlalala at gmail dot com
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Guarantee Section
+================================================== -->
+<div class="scrollpause">
+</div>
+<div class="container">
+	<div class="one-third column separatorv">	  
+    <ul>
+    <li><h3> <a href="document.html">Getting Started</a></h3></li>
+    <li><h3> <a href="interface.html">Interface</a></h3>
+		<p class="paddright">
+			 <ul class="square">
+             <li><a href="interface.html#augmap">The Augmented Map</a></li>
+             <li><a href="interface.html#declare">Declare a Data Type in PAM</a></li>
+             </ul>
+        </p>
+     </li>
+	<li>
+	  <h3><a href="functions.html">Functions</a></h3>
+		<p class="paddright">
+	    <ul class="square">
+             <li><a href="functions.html#seq">For Sequences</a></li>
+             <li><a href="functions.html#set">For Ordered Sets</a></li>             <li><a href="functions.html#map">For Ordered Maps</a></li>             <li><a href="functions.html#augmap">For Augmented Maps</a></li>             </ul>
+             </p>
+      </li>
+	<li>
+	  <h3><a href="examples.html">Examples</a></h3>
+		<p class="paddright">
+	    <ul class="square">
+             <li><a href="examples.html#interval">1D Stabbing Query</a></li>
+             <li><a href="examples.html#range">2D Range Query</a></li>             </ul>
+             </p>
+      </li>
+    </ul>
+	</div>
+	<div class="two-thirds column omega">
+    	<p>In the interface section we have already seen how to implement an augmented map that can quickly answer the sum of values in any key range efficiently. Next let's look at two more examples about using the augmented map interface.</p>
+		<h3 id="interval">1D Stabbing Query Using the Interval Tree</h3>
+        <p>Given a set of intervals on number line, the stabbing query asks about if a certain point p is covered by any intervals in the input set. </p>
+        <p>The intervals can be effectively organized in an augmented map interface. This augmented map stores all intervals as entries, using the left endpoints as keys, and the right endpoints as values. The augmented value is defined as the maximum value (right endpoint) in the map. </p>
+        <p>Then a stabbing query on p is equivalent to ask: for all intervals with left enpoint smaller than p, is the maximum right endpoint larger than p? If so, then at least one interval covers p. Otherwise, no intervals get across p. </p>
+        <p>We then need to report the maximum right endpoint for all input intervals with left endpoint smaller than p. Since the augmented values maintain the maximum right endpoint in a map, this can be done directly by functions on the augmented map interface - The <span class="inlinecode">aug_left(k)</span> function returns the augmented value of all entries smaller than a key k. We use this function to answer stabbing queries.</p>
+<div class="code">
+<pre>
+#include "pam.h"
+using point = uint;
+
+struct interval_map {  
+  using interval = pair<point, point>;
+
+  struct entry {
+    using key_t = point;
+    using val_t = point;
+    using aug_t = point;
+    static inline bool comp(key_t a, key_t b) { return a < b;}
+    static aug_t get_empty() { return 0;}
+    static aug_t from_entry(key_t k, val_t v) { return v;}
+    static aug_t combine(aug_t a, aug_t b) {
+      return (a > b) ? a : b;}
+  };
+
+  using amap = aug_map<entry>;
+  amap m;
+
+  interval_map(interval* A, size_t n) {
+    m = amap(A,A+n); }
+
+  bool stab(point p) {
+    return (m.aug_left(p) > p);}
+
+  void insert(interval i) {m.insert(i);}
+}
+</pre>
+</div><br />
+
+<p>PAM uses augmented trees to support augmented maps, and thus this implementation inherently leads to an interval tree structure (as introduced in the textbook <em>Introduction to Algorithms</em>). </p>
+<p>The complexity of this implementation is as follows:</p>
+Time:
+<table width="600" border="1">
+  <tr>
+    <td align="center" valign="middle">&nbsp;</td>
+    <td align="center" valign="middle"><strong>Work</strong></td>
+    <td align="center" valign="middle"><strong>Depth</strong></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td align="center" valign="middle">(Sequential complexity)</td>
+    <td align="center" valign="middle">(Parallel dependency chain)</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle"><strong>Construction</strong></td>
+    <td align="center" valign="middle">O(nlog(n))</td>
+    <td align="center" valign="middle">O(log(n))</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle"><strong>Stabbing query</strong></td>
+    <td align="center" valign="middle">O(log(n))</td>
+    <td align="center" valign="middle">O(log(n))</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle"><strong>Inserting</strong></td>
+    <td align="center" valign="middle">O(log(n))</td>
+    <td align="center" valign="middle">O(log(n))</td>
+  </tr>
+    <tr>
+    <td align="center" valign="middle"><strong>Report-all</strong></td>
+    <td align="center" valign="middle">O(klog(n/k+1))</td>
+    <td align="center" valign="middle">O(log<span class="fakesup">2</span>(n))</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle"><strong>(not shown above)</strong></td>
+    <td align="center" valign="middle">(output size k)</td>
+    <td align="center" valign="middle"></td>
+  </tr>
+</table>
+<br />
+<p>Space: O(n) </p>
+
+<h3 id="range">2D Range Query Using the Range Trees</h3>
+      <p>Next we look at a more involved example, the 2D range query, which uses a nested augmented map structure. The range query problem is to maintain a set of points, and to answer the number of  points contained in a query rectangle.</p>
+      <p>The 2D range query can be answered using a two-level map structure RangeMap, each level corresponding to one dimension of the coordinates. For simplicity we assume there is no duplicates in coordinates. The key of the outer
+map is the x-coordinate of each point and the value is the y-coordinate. The augmented value of such an outer map, which is the
+inner map, contains the same set of points, but are sorted by
+y-coordinates, and augmented my the size of the map. Therefore, the base function of the outer map is just a singleton on the point and the combine function is a map_union. </p>
+
+<p>To answer queries, we use two nested range searches
+(x<span class="fakesub">L</span>; x<span class="fakesub">R</span>) on the outer map and (y<span class="fakesub">L</span>; y<span class="fakesub">R</span>) on the corresponding inner map. We assume the outer map is defined as OM, and the inner map is defined as IM, then the counting query can be represented using the augmented map interface as:</p>
+<p>RANGEQUERY(M; x<span class="fakesub">L</span>; x<span class="fakesub">R</span>; y<span class="fakesub">L</span>; y<span class="fakesub">R</span>) = MI::aug_range( MO::aug_range(M, x<span class="fakesub">L</span>, x<span class="fakesub">R</span>), y<span class="fakesub">L</span>, y<span class="fakesub">R</span>) </p>
+<p>In practice, since the augmented map is maintained by tree structures. we do not need to explicitely genterate the augmetned value of the outer map. We can just add all augmented values of related inner maps on the way. In the outer range of x-coordinates, there are at most O(log n) such related inner trees. This can also be done by the function <span class="inlinecode">aug_project</span> on the augmented map interface.</p>
+<p>The construction code for such tree structure is as follows:</p>
+<div class="code">
+<pre>
+#include "pam.h"
+
+template<typename x_type, y_type>
+struct RangeQuery {
+  using point_type = Point<x_type, y_type>;
+  
+  struct inner_map_t {
+    using key_t = y_type
+    using val_t = x_type;
+    static bool comp(key_t a, key_t b) { return a < b;}
+    using aug_t = int;
+    inline static aug_t from_entry(key_t k, val_t v) { return 1; }
+    inline static aug_t combine(aug_t a, aug_t b) { return a+b; }
+    static aug_t get_empty() { return 0;}
+  };
+  using inner_map = aug_map<inner_map_t>;
+
+  struct outer_map_t {
+    using key_t = x_type;
+    using val_t = y_type;
+    static bool comp(key_t a, key_t b) { return a < b;}
+    using aug_t = inner_map;
+    inline static aug_t from_entry(key_t k, val_t v) {
+      return aug_t(make_pair(v, k));
+    }
+    inline static aug_t combine(aug_t a, aug_t b) {
+      return aug_t::map_union(a, b);
+    }
+    static aug_t get_empty() { return aug_t();}
+  };
+  using outer_map = aug_map<outer_map_t>;
+
+  RangeQuery(vector<point_type>& points) {
+    const size_t n = points.size();
+    range_tree = outer_map(points.begin(), points.end());    
+  }
+
+  ~RangeQuery() {
+    outer_map::finish();
+    inner_map::finish();
+  }
+  outer_map range_tree;
+};
+</pre>
+</div>
+<p>Here we only show the code for construction. The complete version of code is also provided in the library.</p>
+<p>The complexity of this implementation is as follows:</p>
+Time:
+<table width="600" border="1">
+  <tr>
+    <td align="center" valign="middle">&nbsp;</td>
+    <td align="center" valign="middle"><strong>Work</strong></td>
+    <td align="center" valign="middle"><strong>Depth</strong></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td align="center" valign="middle">(Sequential complexity)</td>
+    <td align="center" valign="middle">(Parallel dependency chain)</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle"><strong>Construction</strong></td>
+    <td align="center" valign="middle">O(nlog(n))</td>
+    <td align="center" valign="middle">O(log<span class="fakesup">3</span>(n))</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle"><strong>Counting query</strong></td>
+    <td align="center" valign="middle">O(log<span class="fakesup">2</span>(n))</td>
+    <td align="center" valign="middle">O(log<span class="fakesup">2</span>(n))</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle"><strong>Inserting</strong></td>
+    <td align="center" valign="middle">O(log<span class="fakesup">2</span>(n))</td>
+    <td align="center" valign="middle">O(log<span class="fakesup">2</span>(n))</td>
+  </tr>
+    <tr>
+    <td align="center" valign="middle"><strong>Report-all</strong></td>
+    <td align="center" valign="middle">O(k+log<span class="fakesup">2</span>(n))</td>
+    <td align="center" valign="middle">O(log<span class="fakesup">2</span>(n))</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle"><strong></strong></td>
+    <td align="center" valign="middle">(output size k)</td>
+    <td align="center" valign="middle"></td>
+  </tr>
+</table>
+<br />
+<p>Space: O(nlog(n)) </p>
+</div>
+</div>
+	<div class="footerwrap">
+		<div class="footer">
+			<p class="back-top floatright">
+				<a href="#top"><span></span></a>
+			</p>
+			<div class="container negdown">
+				<div class="sixteen columns negdown">
+					<div class="four columns alpha">
+					  <div class="footertext">
+						<h1 id="contact">Contact Us</h1>
+						Email: Please send your message to <a href="syhlalala@gmail.com">syhlalala@gmail.com</a><br/>
+						You can also submit your feedback on <a href="https://github.com/cmuparlay/PAM">Github</a>. </div>
+					</div>
+					<div class="four columns">
+						<div class="footertext floatright">
+							<h1>Quick Links</h1>
+							 <a href="index.html">Home</a><br/><a href="document.html">Document</a><br/><a href="https://github.com/cmuparlay/PAM">Download</a>
+						</div>
+					</div>
+					<div class="four columns omega">
+						<div class="footertext floatright">
+							<h1>Document Links</h1>
+							 							<a href="document.html">Getting Started</a><br/><a href="interface.html">Interface</a><br/><a href="functions.html">Functions</a> <br/><a href="examples.html">Examples</a> 
+						</div>
+					</div>
+				<div class="four columns">
+						<div class="footertext floatright">
+						  <h1>Useful Links</h1>
+							 <a href="https://github.com/cmuparlay">CMU-Parlay</a><br/>
+							 <a href="https://www.cs.cmu.edu/~pbbs/index.html">PBBS</a><br/><a href="https://jshun.github.io/ligra/">Ligra</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+</div>
+<div class="copyright">
+		<div class="gototopmobile">
+			<a href="#top">Go to Top</a>
+		</div>
+		 Copyright &copy; 2018. Last Updated by Yihan Sun.
+	</div>
+	<!-- Scripts
+================================================== -->
+
+	<!-- End Document
+================================================== -->
+</body>
+</html>

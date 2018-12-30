@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<!-- Basic Page Needs
+  ================================================== -->
+<meta charset="utf-8">
+<title>Home</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- Mobile Specific Metas
+  ================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- Skin (you can set a different color skin here - just change the name of the color)
+  ================================================== -->
+<link rel="stylesheet" href="stylesheets/skins/blue.css">
+
+<!-- CSS
+  ================================================== -->
+<link rel="stylesheet" href="stylesheets/style.css">
+<link rel="stylesheet" href="stylesheets/styleresponsive.css">
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!-- Favicons
+	================================================== -->
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+</head>
+<body>
+<!-- Navigation
+	================================================== -->
+<div id="wrapnav">
+	<div class="container">
+		<div class="three columns alpha">
+			<div id="top" style="display:inline;">
+				<span class="logo"><a href="index.html">PAM</a></span>
+				<br/><span class="subheader">Parallel Augmented Maps</span>
+			</div>
+		</div>
+		<div class="thirteen columns omega">
+			<div class="menu">
+				<nav>
+				<ul class="menuitems">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="document.html">Document</a></li>
+					<li><a href="index.html#references">References</a></li>
+                    <li><a href="index.html#team">Team</a></li>
+					<li><a href="index.html#contact">Contact Us</a></li>
+				</ul>
+				</nav>
+			</div>
+			<div class="rightnav">
+				<span class="rightnavtext">Questions?</span>
+				<br/>Contact: syhlalala at gmail dot com
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Header
+	================================================== -->
+<div class="header">
+	<div class="container">
+		<div class="nine columns alpha">
+			<div class="rslides_container">
+				<ul class="rslides" id="slider2">
+					<li><div class="cap-text">This is a wild balanced binary tree. In fact, it is named hyphaene compressa, or the East African doum palm.</div><a href="#">
+<img src="images/binarytree.jpg" alt="" class="slidepic"></a><div class="text"><br /></div>
+                    </li>
+					<li><div class="cap-text">All algorithms in PAM are based on a single primitive Join. Except Join, all the other algorithms are generic across balancing schemes.</div><a href="#"><img src="images/join.jpg" alt="" class="slidepic"></a></li>
+					<li><div class="cap-text">The tree structure has several good properties, which are essential for efficiently processing big data.</div><a href="#"><img src="images/tree.jpg" alt="" class="slidepic"></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="seven columns omega">
+			<div class="slidertext">
+				<h1>PAM (Parallel Augmented Maps)</h1>
+				<h2>A Parallel C++ Library for Balanced Binary Trees</h2>
+				<p><ul>
+                     <li><img src="images/star.png" class="middlealign"> Supports efficient parallel (augmented) balanced binary trees. </li>
+					 <li><img src="images/star.png" class="middlealign"> Provides a simple and effective interface for abstract data types (ADTs) including sequences, ordered sets, ordered maps and <a href="https://en.wikipedia.org/wiki/Augmented_map">augmented maps</a>. </li>
+					 
+				     <li><img src="images/star.png" class="middlealign"> Uses multi-core parallelism supported by Cilk.</li>
+                     <li><img src="images/star.png" class="middlealign"> Supports four different balancing schemes: <a href="https://en.wikipedia.org/wiki/AVL_tree">AVL trees</a>, <a href="https://en.wikipedia.org/wiki/Red–black_tree">red-black trees</a>, <a href="https://en.wikipedia.org/wiki/Weight-balanced_tree">weight-balanced trees</a>, and <a href="https://en.wikipedia.org/wiki/Treap">treaps</a>.</li>
+                     <li><img src="images/star.png" class="middlealign"> Adopts a simple algorithmic framework: the join-based algorithms.</li>
+                     <li><img src="images/star.png" class="middlealign"> Is fast both sequentially and in parallel.</li>
+				   </ul>
+				</p>
+				
+				<a href="https://github.com/cmuparlay/PAM" class="button headerbutton">Download</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="afterheader">
+</div>
+<!-- Features Section
+================================================== -->
+<div class="scrollpause">
+</div>
+<div class="container" id="features">
+	<div class="sixteen columns neg">
+		<div class="titleborder">
+			<span class="title colorme">Features</span>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="one-third column">
+		<h3> Full Featured</h3>
+		<p>
+			PAM supports commonly-used functions including insertion, deletion, lookup, union, intersection, difference, map-reduce, filter, range, etc., for four balancing schemes.
+		</p>
+	</div>
+	<div class="one-third column">
+		<h3>Theoretically Efficient</h3>
+		<p>
+			All algorithms in PAM are asymptotically work-efficient (sequentially optimal) with polylogarithmic parallel depth. 
+		</p>
+	</div>
+	<div class="one-third column">	
+		<h3>Highly Parallelized</h3>
+		<p>
+		PAM uses fork-join parallelism supported by <a href="https://www.cilkplus.org/">Cilk</a>. All algorithms have polylogarithmic parallel depth and have been shown to be scalable to more than 100 working threads. All tested algorithms in PAM achieve good parallel self-speedup in practice. </p>	
+	</div>
+</div>
+<div class="container">
+	<div class="one-third column">
+		<h3>Persistent</h3>
+		<p>
+			PAM implements fully-persistent tree structures using path-copying, meaning that any update on the tree structure will not destruct the old tree structure but yield a new version. The trees are also strongly-immutable or functional.
+		</p>
+	</div>
+	<div class="one-third column">
+		<h3> Multi-version Concurrency Control</h3>
+		<p>
+			MVCC in PAM is supported based on persistence. Any number of threads can access the tree concurrently safely, working on a snapshot. The multi-versioning is achieved via snapshots. For supporting serializability, batching with a single writer is recommended. Other version-control algorithms can be applied. E.g., aborting when detecting conflicts.
+		</p>
+	</div>
+	<div class="one-third column">	
+		<h3> Garbage Collection</h3>
+		<p>
+			PAM uses reference counting for fine-grained garbage collection. The garbage collector will only free the tree nodes only appearing in the to-be-collected version, while keeping those shared with other versions. The garbage collection algorithm also runs in parallel.
+		</p>	
+	</div>
+</div>
+<div class="container">
+	<div class="one-third column">
+		<h3>Simple & Generic Algorithms</h3>
+		<p>
+		PAM uses the <a href="https://en.wikipedia.org/wiki/Join-based_tree_algorithms">Join-based algorithm framework</a>. Except Join all the other algorithms are generic across multiple balancing schemes (four implemented in PAM: <a href="https://en.wikipedia.org/wiki/AVL_tree">AVL trees</a>, <a href="https://en.wikipedia.org/wiki/Red–black_tree">red-black trees</a>, <a href="https://en.wikipedia.org/wiki/Weight-balanced_tree">weight-balanced trees</a>, and <a href="https://en.wikipedia.org/wiki/Treap">treaps</a>). The algorithms are also simple and PAM has light-weighted code. </p>
+	</div>
+	<div class="one-third column">
+		<h3>Framework for Augmentation</h3>
+		<p>
+		PAM support an abstract framework for augmentations through C++ template. The framework is formalized as the <a href="https://en.wikipedia.org/wiki/Augmented_map">augmented map</a>, which is an abstract data type extending ordered (key-value) maps. PAM support two data structures for augmented maps: augmented trees and prefix structures.</p>
+	</div>
+	<div class="one-third column">	
+		<h3>Extendable to Various Applications</h3>
+		<p>
+			PAM supports clean general-purpose interface such that many applications can be implemented directly on top of PAM. The library provides example code for applications in computational geometry (e.g., range trees) and inverted index searching. PAM has also been applied to graph processing systems and database management systems. Making use of PAM simplifies coding and greatly reduces the number of lines of code.
+		</p>	
+	</div>
+</div>
+<!-- Guarantee Section
+================================================== -->
+<div class="scrollpause">
+</div>
+<div class="container" id="references">
+	<div class="sixteen columns">
+		<div class="titleborder">
+			<span class="title colorme">References</span>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="one-third column separatorv">	  
+		<h3> Tutorials</h3>
+		<p class="paddright">
+			 <ul class="square">
+             <li>PPoPP (Principles and Practice of Parallel Programming) 2019, Washington, DC. To Appear.</li>
+             </ul>
+             </p>
+		<h3> Wikipedia Pages</h3>
+		<p class="paddright">
+			 <ul class="square">
+             <li><a href="https://en.wikipedia.org/wiki/Augmented_map">The Augmented Map</a></li>
+             <li><a href="https://en.wikipedia.org/wiki/PAM_library">The PAM Library</a></li>
+             <li><a href="https://en.wikipedia.org/wiki/Join-based_tree_algorithms">Join-based Algorithms</a></li>
+             </ul>
+             </p>
+	</div>
+	<div class="two-thirds column omega">
+		<h3>Conference Papers</h3>
+		<ul class="square">
+			<li><strong>Just Join for Parallel Ordered Sets.</strong> Guy E. Blelloch, Daniel Ferizovic and Yihan Sun. ACM Symposium on Parallelism in Algorithms and Architectures (SPAA), 2016. Also, arXiv:1602.02120 [cs.DS]
+            <p> Join-based algorithms and proofs for bounds.</p></li>
+			<li><strong>PAM: Parallel Augmented Maps</strong>. Yihan Sun, Daniel Ferizovic and Guy Blelloch. ACM Symposium on Principles and Practice of Parallel Programming (PPoPP), 2018. Also, arXiv:1612.05665 [cs.DS]
+            <p> Implementation details of the library and the formalization of augmented maps.</p></li>
+            <li><strong>Parallel Range, Segment and Rectangle Queries with Augmented Maps</strong>. Yihan Sun and Guy E. Blelloch. Algorithm Engineering and Experiments (ALENEX), 2019. Also, ArXiv:1803.08621 [cs.CG].
+            <p>Applied to computational geometry algorithms.</p>
+            </li>
+            <li><strong>Efficient Single Writer Concurrency</strong>. Naama Ben-David, Guy E. Blelloch, Yihan Sun and Yuanhao Wei. Manuscript. ArXiv:1803.08617 [cs.DC].
+            <p>Applied to multi-version concurrency control with effective garbage collection.</p>
+            </li>
+		</ul>
+	</div>
+</div>
+	<!-- Testimonials
+================================================== -->
+<div class="scrollpause">
+</div>
+<div class="container" id="team">
+	<div class="sixteen columns">
+		<div class="titleborder">
+			<span class="title colorme">Team</span>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="one-third column">
+		<h5><a href="http://www.cs.cmu.edu/~yihans/">Yihan Sun</a></h5>
+		<p class="testimonial">
+			<img src="images/mao.jpg" width="50px" class="leftpic" alt=""> Yihan Sun is currently a Ph.D. student at CMU working on parallel algorithms.
+            <span class="author"><a href="http://www.cs.cmu.edu/~yihans/">Homepage</a></span>
+		</p>
+		
+	</div>
+	<div class="one-third column">
+		<h5><a href="http://www.cs.cmu.edu/~./blelloch/">Guy E. Blelloch</a></h5>
+		<p class="testimonial">
+			<img src="images/guy.jpg" width="50px" class="leftpic" alt=""> Guy Blelloch is a professor, and the Associate Dean for Undergraduate Programs at CMU.
+            <span class="author"><a href="http://www.cs.cmu.edu/~./blelloch/">Homepage</a></span>
+		</p>
+	</div>
+	<div class="one-third column">
+		<h5>Daniel Ferizovic</h5>
+		<p class="testimonial">
+			<img src="images/usr.jpg" class="leftpic" alt=""> Daniel Ferizovic was involved in this work when he was a student intern at CMU.
+		</p>
+	</div>
+</div>
+<div class="container" id="team">
+	<div class="sixteen columns">
+    <p>We thank the <a href="https://www.cs.cmu.edu/~pbbs/index.html">PBBS</a> team because PAM uses several building blocks in PBBS.</p>
+	<p>We also would like to thank Laxman Dhulipala and Joana Fonseca for reporting several bugs in the library.</p>
+	</div>
+</div>
+
+<!--
+<div class="scrollpause">
+</div>
+<div class="container" id="contact">
+	<div class="sixteen columns">
+		<div class="titleborder">
+			<span class="title colorme">Contact Us</span>
+		</div>
+        <br />
+        Please send your message to syhlalala@gmail.com, or submit your feedback on Github.
+	</div>
+</div>
+-->
+
+
+	<div class="footerwrap">
+		<div class="footer">
+			<p class="back-top floatright">
+				<a href="#top"><span></span></a>
+			</p>
+			<div class="container negdown">
+				<div class="sixteen columns negdown">
+					<div class="four columns alpha">
+					  <div class="footertext">
+						<h1 id="contact">Contact Us</h1>
+						Email: Please send your message to <a href="syhlalala@gmail.com">syhlalala@gmail.com</a><br/>You can also submit your feedback on <a href="https://github.com/cmuparlay/PAM">Github</a>. </div>
+					</div>
+					<div class="four columns">
+						<div class="footertext floatright">
+							<h1>Quick Links</h1>
+							 <a href="index.html">Home</a><br/><a href="document.html">Document</a><br/><a href="https://github.com/cmuparlay/PAM">Download</a>
+						</div>
+					</div>
+					<div class="four columns omega">
+						<div class="footertext floatright">
+							<h1>Document Links</h1>
+							 							<a href="document.html">Getting Started</a><br/><a href="interface.html">Interface</a><br/><a href="functions.html">Functions</a> <br/><a href="examples.html">Examples</a> 
+						</div>
+					</div>
+				<div class="four columns">
+						<div class="footertext floatright">
+						  <h1>Useful Links</h1>
+							 <a href="https://github.com/cmuparlay">CMU-Parlay</a><br/>
+							 <a href="https://www.cs.cmu.edu/~pbbs/index.html">PBBS</a><br/><a href="https://jshun.github.io/ligra/">Ligra</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+    
+	<div class="copyright">
+		<div class="gototopmobile">
+			<a href="#top">Go to Top</a>
+		</div>
+		 Copyright &copy; 2018. Last Updated by Yihan Sun.
+	</div>
+	<!-- Scripts
+================================================== -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/responsiveslides.min.js"></script>
+	<script src="js/smoothscroll.js"></script>
+	<script src="peel/peel.js"></script>
+	<script src="js/alert.js"></script>
+	<script src="js/responsivemenu.js"></script>
+	<script src="js/formsvalidation.js"></script>
+	<!-- End Document
+================================================== -->
+</body>
+</html>

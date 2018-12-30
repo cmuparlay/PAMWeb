@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<!-- Basic Page Needs
+  ================================================== -->
+<meta charset="utf-8">
+<title>Home</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- Mobile Specific Metas
+  ================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- Skin (you can set a different color skin here - just change the name of the color)
+  ================================================== -->
+<link rel="stylesheet" href="stylesheets/skins/blue.css">
+
+<!-- CSS
+  ================================================== -->
+<link rel="stylesheet" href="stylesheets/style.css">
+<link rel="stylesheet" href="stylesheets/styleresponsive.css">
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!-- Favicons
+	================================================== -->
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+</head>
+<body>
+<!-- Navigation
+	================================================== -->
+<div id="wrapnav">
+	<div class="container">
+		<div class="three columns alpha">
+			<div id="top" style="display:inline;">
+				<span class="logo"><a href="index.html">PAM</a></span>
+				<br/><span class="subheader">Parallel Augmented Maps</span>
+			</div>
+		</div>
+		<div class="thirteen columns omega">
+			<div class="menu">
+				<nav>
+				<ul class="menuitems">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="document.html">Document</a></li>
+					<li><a href="index.html#references">References</a></li>
+                    <li><a href="index.html#team">Team</a></li>
+					<li><a href="index.html#contact">Contact Us</a></li>
+				</ul>
+				</nav>
+			</div>
+			<div class="rightnav">
+				<span class="rightnavtext">Questions?</span>
+				<br/>Contact: syhlalala at gmail dot com
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Guarantee Section
+================================================== -->
+<div class="scrollpause">
+</div>
+<div class="container">
+	<div class="one-third column separatorv">	  
+    <ul>
+    <li><h3> <a href="document.html">Getting Started</a></h3></li>
+    <li><h3> <a href="interface.html">Interface</a></h3>
+		<p class="paddright">
+			 <ul class="square">
+             <li><a href="interface.html#augmap">The Augmented Map</a></li>
+             <li><a href="interface.html#declare">Declare a Data Type in PAM</a></li>
+             </ul>
+        </p>
+     </li>
+	<li>
+	  <h3><a href="functions.html">Functions</a></h3>
+		<p class="paddright">
+	    <ul class="square">
+             <li><a href="functions.html#seq">For Sequences</a></li>
+             <li><a href="functions.html#set">For Ordered Sets</a></li>             <li><a href="functions.html#map">For Ordered Maps</a></li>             <li><a href="functions.html#augmap">For Augmented Maps</a></li>             </ul>
+             </p>
+      </li>
+	<li>
+	  <h3><a href="examples.html">Examples</a></h3>
+		<p class="paddright">
+	    <ul class="square">
+             <li><a href="examples.html#interval">1D Stabbing Query</a></li>
+             <li><a href="examples.html#range">2D Range Query</a></li>             </ul>
+             </p>
+      </li>
+    </ul>
+	</div>
+	<div class="two-thirds column omega">
+		<h3 id="prerequisites">Prerequisites</h3>
+        PAM can be compiled with g++ 5.4.0 or later versions with support for Cilk Plus. 
+      <h3 id="get_start">Getting Started</h3>
+        <p>Download the code if you have not already. The library is located in the directory <span class="inlinecode">c++</span>. The library also provides example codes.</p>
+<table width="650" border="0">
+  <tr>
+    <td><strong>c++</strong></td> <td> : </td>
+    <td>The library</td>
+  </tr>
+  <tr>
+    <td width="90"><strong>common</strong></td> <td width="20"> : </td>
+    <td>The implementation for prefix structures</td>
+  </tr>
+  <tr>
+    <td><strong>interval</strong></td> <td> : </td>
+    <td>The implementation for 1D stabbing query / report-all query.</td>
+    </tr>
+  <tr>
+    <td /> <td /> <td> Containing an interval tree.</td>
+  </tr>
+  <tr>
+    <td><strong>range_query</strong></td> <td> : </td>
+    <td>The implementation for 2D point containment counting query / report-all query.</td>
+  </tr>
+  <tr>
+    <td /> <td /> <td> Containing a range tree and two sweepline algorithms.</td>
+  </tr>  
+  <tr>
+    <td><strong>rectangle</strong></td> <td> : </td>
+    <td>The implementation for 2D rectangle stabbing counting query / report-all query.</td>
+  </tr>
+  <tr>
+    <td /> <td /> <td> Containing two tree structures and two sweepline algorithms.</td>
+  </tr>
+  <tr>
+    <td><strong>segment</strong></td> <td> : </td>
+    <td>The implementation for 2D segment intersection counting query / report-all query.</td>
+  </tr>
+  <tr>
+    <td /> <td /> <td> Containing two tree structures and two sweepline algorithms.</td>
+  </tr>
+  <tr>
+    <td><strong>tests</strong></td> <td> : </td>
+    <td>General tests.</td>
+  </tr>  
+</table>
+<br/>
+        <p>To run a simple test in PAM. Try the following:</p>
+        <p class="code">
+        $ cd test<br />
+        $ make<br />
+        $ ./aug_sum [-n size1] [-m size2] [-r rounds] &lt;testid&gt;
+        </p>
+        <p>For example, </p>
+        <p class="code">
+        $ ./aug_sum 4 -n 100000000 -m 100000000 -r 5
+        </p>
+        <p>will test the performance of combining two trees (union) both of size 1000000000 for 5 rounds. We recommend to use <span class="inlinecode">numactl -i all</span> for all test cases.</p>
+        <p>Users can also adjust the number of working threads by:
+        <p class="code">export CILK_NWORKERS=&lt;num_threads&gt;</p>
+	</div>
+</div>
+	<div class="footerwrap">
+		<div class="footer">
+			<p class="back-top floatright">
+				<a href="#top"><span></span></a>
+			</p>
+			<div class="container negdown">
+				<div class="sixteen columns negdown">
+					<div class="four columns alpha">
+					  <div class="footertext">
+						<h1 id="contact">Contact Us</h1>
+						Email: Please send your message to <a href="syhlalala@gmail.com">syhlalala@gmail.com</a><br/>You can also submit your feedback on <a href="https://github.com/cmuparlay/PAM">Github</a>. </div>
+					</div>
+					<div class="four columns">
+						<div class="footertext floatright">
+							<h1>Quick Links</h1>
+							 <a href="index.html">Home</a><br/><a href="document.html">Document</a><br/><a href="https://github.com/cmuparlay/PAM">Download</a>
+						</div>
+					</div>
+					<div class="four columns omega">
+						<div class="footertext floatright">
+							<h1>Document Links</h1>
+							 							<a href="document.html">Getting Started</a><br/><a href="interface.html">Interface</a><br/><a href="functions.html">Functions</a> <br/><a href="examples.html">Examples</a> 
+						</div>
+					</div>
+				<div class="four columns">
+						<div class="footertext floatright">
+						  <h1>Useful Links</h1>
+							 <a href="https://github.com/cmuparlay">CMU-Parlay</a><br/>
+							 <a href="https://www.cs.cmu.edu/~pbbs/index.html">PBBS</a><br/><a href="https://jshun.github.io/ligra/">Ligra</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="copyright">
+		<div class="gototopmobile">
+			<a href="#top">Go to Top</a>
+		</div>
+		 Copyright &copy; 2018. Last Updated by Yihan Sun.
+	</div>
+	<!-- Scripts
+================================================== -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/responsiveslides.min.js"></script>
+	<script src="js/smoothscroll.js"></script>
+	<script src="peel/peel.js"></script>
+	<script src="js/alert.js"></script>
+	<script src="js/responsivemenu.js"></script>
+	<script src="js/formsvalidation.js"></script>
+	<!-- End Document
+================================================== -->
+</body>
+</html>

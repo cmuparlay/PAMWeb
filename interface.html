@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<!-- Basic Page Needs
+  ================================================== -->
+<meta charset="utf-8">
+<title>Home</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- Mobile Specific Metas
+  ================================================== -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- Skin (you can set a different color skin here - just change the name of the color)
+  ================================================== -->
+<link rel="stylesheet" href="stylesheets/skins/blue.css">
+
+<!-- CSS
+  ================================================== -->
+<link rel="stylesheet" href="stylesheets/style.css">
+<link rel="stylesheet" href="stylesheets/styleresponsive.css">
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!-- Favicons
+	================================================== -->
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+</head>
+<body>
+<!-- Navigation
+	================================================== -->
+<div id="wrapnav">
+	<div class="container">
+		<div class="three columns alpha">
+			<div id="top" style="display:inline;">
+				<span class="logo"><a href="index.html">PAM</a></span>
+				<br/><span class="subheader">Parallel Augmented Maps</span>
+			</div>
+		</div>
+		<div class="thirteen columns omega">
+			<div class="menu">
+				<nav>
+				<ul class="menuitems">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="document.html">Document</a></li>
+					<li><a href="index.html#references">References</a></li>
+                    <li><a href="index.html#team">Team</a></li>
+					<li><a href="index.html#contact">Contact Us</a></li>
+				</ul>
+				</nav>
+			</div>
+			<div class="rightnav">
+				<span class="rightnavtext">Questions?</span>
+				<br/>Contact: syhlalala at gmail dot com
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Guarantee Section
+================================================== -->
+<div class="scrollpause">
+</div>
+<div class="container">
+	<div class="one-third column separatorv">	  
+    <ul>
+    <li><h3> <a href="document.html">Getting Started</a></h3></li>
+    <li><h3> <a href="interface.html">Interface</a></h3>
+		<p class="paddright">
+			 <ul class="square">
+             <li><a href="interface.html#augmap">The Augmented Map</a></li>
+             <li><a href="interface.html#declare">Declare a Data Type in PAM</a></li>
+             </ul>
+        </p>
+     </li>
+	<li>
+	  <h3><a href="functions.html">Functions</a></h3>
+		<p class="paddright">
+	    <ul class="square">
+             <li><a href="functions.html#seq">For Sequences</a></li>
+             <li><a href="functions.html#set">For Ordered Sets</a></li>             <li><a href="functions.html#map">For Ordered Maps</a></li>             <li><a href="functions.html#augmap">For Augmented Maps</a></li>             </ul>
+             </p>
+      </li>
+	<li>
+	  <h3><a href="examples.html">Examples</a></h3>
+		<p class="paddright">
+	    <ul class="square">
+             <li><a href="examples.html#interval">1D Stabbing Query</a></li>
+             <li><a href="examples.html#range">2D Range Query</a></li>             </ul>
+             </p>
+      </li>
+    </ul>
+	</div>
+	<div class="two-thirds column omega">
+		<h3 id="augmap">The Augmented Map</h3>
+        An augmented map is defined by the following parameters:
+        <table width="650" border="0">
+  <tr>
+    <td><strong>K</strong></td> <td> : </td>
+    <td>They key type.</td>
+  </tr>
+  <tr>
+    <td width="150"><strong>&lt; : K &times; K &rarr; bool</strong></td> <td width="20"> : </td>
+    <td>The comparison function on K.</td>
+  </tr>
+  <tr>
+    <td><strong>V</strong></td> <td> : </td>
+    <td>The value type.</td>
+    </tr>
+  <tr>
+    <td><strong>A</strong></td> <td> : </td>
+    <td>The augmented value type.</td>
+  </tr>
+  <tr>
+    <td><strong>g : K &times; V &rarr; A</strong></td> <td> : </td>
+    <td>The base function that maps a single entry to its augmented value.</td>
+  </tr>
+  <tr>
+    <td><strong>f : A &times; A &rarr; A</strong></td> <td> : </td>
+    <td>The combine function that reduces multiple augmented values. It must be associative.</td>
+  </tr>
+  <tr>
+    <td><strong>I (&#8714; A)</strong></td> <td> : </td>
+    <td>The identity of f.</td>
+  </tr>  
+</table>
+<br/> 
+<p>The augmented map is developed for fast calculating the range sum in an ordered map. We define the augmented value AV(M) of a map M={m<span class="fakesub">1</span>, m<span class="fakesub">2</span>, ..., m<span class="fakesub">n</span>} as: </p>
+<p class="code">AV(M) = f(g(m<span class="fakesub">1</span>), g(m<span class="fakesub">2</span>), ..., g(m<span class="fakesub">n</span>))</p>
+<p>where the binary function f is extended to zero, one, or multiple operants by:</p>
+<p class="code">f(&empty;) = I<br />
+f(a) = a <br />
+f(a<span class="fakesub">1</span>, a<span class="fakesub">2</span>, ..., a<span class="fakesub">n</span>) = f(f(a<span class="fakesub">1</span>, ..., a<span class="fakesub">n-1</span>), a<span class="fakesub">n</span>)
+</p>
+<p>Then the map can be used to quickly answer queries related to the abstract "sum" (augmented value) for all entries within a key range.</p>
+
+      <h3 id="declare">Declare a Data Type in PAM</h3>
+      <p>To use PAM, users should include the header file:</p>
+      <p class="code">#include "pam.h"</p>
+        <p>In PAM, users can use C++ templates to define a sequence, / ordered set / ordered map / augmented map. For example, defining an augmented map with integer keys and values, and augmented values taking the sum of all values can be done as follows: </p>
+      <p class="code">
+        struct entry { <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;using key_t = int; // K (key type)<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;using val_t = int; // V (value type)<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;using aug_t = int; // A (augmented value)<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;static inline bool comp(key_t a, key_t b) { return a < b;} // &lt; (comparison function on K)<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;static aug_t get_empty() { return 0;} // I(identity of f)<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;static aug_t from_entry(key_t k, val_t v) { return v;} // g (base function)<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;static aug_t combine(aug_t a, aug_t b) { return a+b;} // f (combine function)<br />
+};<br />
+aug_map&lt;entry&gt; a;
+</p>
+
+      <p>To declare other data types, just use a subset of parameters in an augmented map.</p>
+        <table width="600" border="1">
+  <tr>
+    <td>&nbsp;</td>
+    <td align="center" ><strong>Key type</strong></td>
+    <td align="center" ><strong>Comparison function</strong></td>
+    <td align="center"><strong>Value type</strong></td>
+    <td align="center"><strong>Augmentation</strong></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td align="center"><strong>(K)</strong></td>
+    <td align="center"><strong>(&lt;)</strong></td>
+    <td align="center"><strong>(V)</strong></td>
+    <td align="center"><strong>(A, g, f, I)</strong></td>
+  </tr>  
+  <tr>
+    <td><strong>Sequence</strong></td>
+    <td align="center">&#10003;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><strong>Ordered Sets</strong></td>
+    <td align="center">&#10003;</td>
+    <td align="center">&#10003;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><strong>Ordered Maps</strong></td>
+    <td align="center">&#10003;</td>
+    <td align="center">&#10003;</td>
+    <td align="center">&#10003;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><strong>Augmented Maps</strong></td>
+    <td align="center">&#10003;</td>
+    <td align="center">&#10003;</td>
+    <td align="center">&#10003;</td>
+    <td align="center">&#10003;</td>
+  </tr>
+  <tr>
+    <td><strong>Augmented Sets</strong></td>
+    <td align="center">&#10003;</td>
+    <td align="center">&#10003;</td>
+    <td>&nbsp </td>
+    <td align="center">&#10003;</td>
+  </tr>
+</table> 
+      <p>&nbsp;</p>
+      <p>The default balancing scheme is the weight-balanced tree. Users can change to other balancing schemes by:</p>
+      <div class="code">
+      <pre>
+aug_map&lt;entry, avl_tree&gt;
+aug_map&lt;entry, red_black_tree&gt;
+aug_map&lt;entry, treap&gt;
+      </pre>
+      </div>
+      <p>&nbsp;</p>
+      <p><br />
+          
+        Here is an example of some operations on two augmented maps:
+      </p>
+      <div class="code">
+<pre>
+#include &lt;pam.h&gt;
+
+struct entry { 
+    using key_t = int; // K (key type)
+    using val_t = int; // V (value type)
+    using aug_t = int; // A (augmented value)
+    static inline bool comp(key_t a, key_t b) { return a < b;} // &lt; (comparison function on K)
+    static aug_t get_empty() { return 0;} // I(identity of f)
+    static aug_t from_entry(key_t k, val_t v) { return v;} // g (base function)
+    static aug_t combine(aug_t a, aug_t b) { return a+b;} // f (combine function)
+};
+using mtype = aug_map&lt;entry&gt;;
+using ptype = std::pair&lt;int, int&gt;;
+
+int main() {
+    int[] a = {ptype(7, 12), ptype(30, 6), ptype(8, 1)};
+    m_type m1(a1, a1+3);
+    m_type m2;
+    m2.insert(ptype(12, 4));
+    m2.insert(ptype(2, 9));
+    m_type m3 = mtype::map_union(m1, m2);
+    std::cout &lt;&lt; mtype::aug_range(m3, 5, 20) &lt;&lt; endl;
+}
+</pre>
+</div><br />
+<p> The <span class="inlinecode">aug_range</span> will output the sum of values in key range from 5 to 20, which will be 17.</p>
+<p>Using the same augmented map type (mtype), we can maintain a collection of key-value pairs, and answer any query about the sum in a certain key range efficiently. In PAM, augmented maps are supported by augmented trees, and thus such query can be reported in O(log n) time for n entries in the augmented map.</p>
+</div>
+</div>
+
+	<div class="footerwrap">
+		<div class="footer">
+			<p class="back-top floatright">
+				<a href="#top"><span></span></a>
+			</p>
+			<div class="container negdown">
+				<div class="sixteen columns negdown">
+					<div class="four columns alpha">
+					  <div class="footertext">
+						<h1 id="contact">Contact Us</h1>
+						Email: Please send your message to <a href="syhlalala@gmail.com">syhlalala@gmail.com</a><br/>You can also submit your feedback on <a href="https://github.com/cmuparlay/PAM">Github</a>. </div>
+					</div>
+					<div class="four columns">
+						<div class="footertext floatright">
+							<h1>Quick Links</h1>
+							 <a href="index.html">Home</a><br/><a href="document.html">Document</a><br/><a href="https://github.com/cmuparlay/PAM">Download</a>
+						</div>
+					</div>
+					<div class="four columns omega">
+						<div class="footertext floatright">
+							<h1>Document Links</h1>
+							 							<a href="document.html">Getting Started</a><br/><a href="interface.html">Interface</a><br/><a href="functions.html">Functions</a> <br/><a href="examples.html">Examples</a> 
+						</div>
+					</div>
+				<div class="four columns">
+						<div class="footertext floatright">
+						  <h1>Useful Links</h1>
+							 <a href="https://github.com/cmuparlay">CMU-Parlay</a><br/>
+							 <a href="https://www.cs.cmu.edu/~pbbs/index.html">PBBS</a><br/><a href="https://jshun.github.io/ligra/">Ligra</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="copyright">
+		<div class="gototopmobile">
+			<a href="#top">Go to Top</a>
+		</div>
+		 Copyright &copy; 2018. Last Updated by Yihan Sun.
+	</div>
+	<!-- Scripts
+================================================== -->
+
+	<!-- End Document
+================================================== -->
+</body>
+</html>
